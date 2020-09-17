@@ -3,14 +3,11 @@
 using Microsoft.Extensions.ObjectPool;
 
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace DingDingDiceBot.CmdHelper
 {
     internal sealed class ParseContext : IDisposable
     {
-
         private const int MAX_TOKEN_COUNT = 256;
         private const int MAX_BUFFER_SIZE = MAX_TOKEN_COUNT << 1;
         private const int STACK_MIN_INDEX = MAX_TOKEN_COUNT;
@@ -45,9 +42,11 @@ namespace DingDingDiceBot.CmdHelper
         public Token QueueEnd => _buffer[_queueIndex - 1];
 
         public void Push(Token token) => _buffer[_stackIndex++] = token;
+
         public Token Pop() => _buffer[--_stackIndex];
 
         public void Enqueue(Token token) => _buffer[_queueIndex++] = token;
+
         public void Replace(Token token) => _buffer[_queueIndex - 1] = token;
 
         public void SetFail(string reason)
@@ -123,9 +122,5 @@ namespace DingDingDiceBot.CmdHelper
         }
 
         public void Dispose() => _pool.Return(this);
-
-
-
-
     }
 }

@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace DingDingDiceBot.CmdHelper
+﻿namespace DingDingDiceBot.CmdHelper
 {
-	internal abstract class Token
+    internal abstract class Token
     {
-		public abstract TokenType Type { get; }
+        public abstract TokenType Type { get; }
 
-		internal abstract void ReadToken(ParseContext context);
-	}
+        internal abstract void ReadToken(ParseContext context);
+    }
 }

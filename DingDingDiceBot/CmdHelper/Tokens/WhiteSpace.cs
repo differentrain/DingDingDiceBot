@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace DingDingDiceBot.CmdHelper.Tokens
+﻿namespace DingDingDiceBot.CmdHelper.Tokens
 {
     internal sealed class WhiteSpace : Token
     {

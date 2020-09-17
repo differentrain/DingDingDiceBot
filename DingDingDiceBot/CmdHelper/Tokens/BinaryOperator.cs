@@ -1,18 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace DingDingDiceBot.CmdHelper.Tokens
+﻿namespace DingDingDiceBot.CmdHelper.Tokens
 {
     internal abstract class BinaryOperator : Token
     {
-
         public override TokenType Type => TokenType.BinaryOperator;
 
         public abstract int Precedence { get; }
         public abstract string Name { get; }
         public abstract bool IsSubOrDiv { get; }
-
 
         internal override void ReadToken(ParseContext context)
         {

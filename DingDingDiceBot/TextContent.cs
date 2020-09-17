@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Text;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace DingDingDiceBot
 {
@@ -10,6 +7,7 @@ namespace DingDingDiceBot
         [Required]
 #pragma warning disable IDE1006 // 命名样式
         public string content { get; set; }
+
 #pragma warning restore IDE1006 // 命名样式
     }
 }

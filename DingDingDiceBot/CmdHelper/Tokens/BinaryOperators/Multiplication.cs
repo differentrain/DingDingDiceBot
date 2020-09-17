@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace DingDingDiceBot.CmdHelper.Tokens.BinaryOperators
+﻿namespace DingDingDiceBot.CmdHelper.Tokens.BinaryOperators
 {
     internal sealed class Multiplication : BinaryOperator
     {

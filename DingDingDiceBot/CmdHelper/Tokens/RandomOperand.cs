@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Text;
 
 namespace DingDingDiceBot.CmdHelper.Tokens
@@ -69,6 +68,5 @@ namespace DingDingDiceBot.CmdHelper.Tokens
                 _textDes = sb.ToString()
             };
         }
-
     }
 }

@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace DingDingDiceBot.CmdHelper.Tokens 
+namespace DingDingDiceBot.CmdHelper.Tokens
 {
     internal sealed class CalcResult : Token
     {
-
         public CalcResult(long value, string text, int precedence)
         {
             Value = value;
@@ -23,6 +20,5 @@ namespace DingDingDiceBot.CmdHelper.Tokens
         public void AddParenthesis() => Text = $"({Text})";
 
         internal override void ReadToken(ParseContext context) => throw new NotImplementedException();
-
     }
 }
