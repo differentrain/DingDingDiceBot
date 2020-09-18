@@ -8,7 +8,8 @@
 
         internal override unsafe void ReadToken(ParseContext context)
         {
-            if (context.Str[context.Pos] != '(')
+            char currentChar = context.Str[context.Pos];
+            if (currentChar != '(' && currentChar != '（')
             {
                 return;
             }
