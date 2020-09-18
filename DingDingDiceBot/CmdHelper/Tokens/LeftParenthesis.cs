@@ -4,15 +4,22 @@
     {
         public static readonly LeftParenthesis Token = new LeftParenthesis();
 
-        public override TokenType Type => TokenType.LeftParenthesis;
+        internal override TokenType Type => TokenType.LeftParenthesis;
 
-        internal unsafe override void ReadToken(ParseContext context)
+        internal override unsafe void ReadToken(ParseContext context)
         {
             if (context.Str[context.Pos] != '(')
             {
                 return;
             }
-            context.LastTokenType = Type;
+            TokenType lastToken = context._lastTokenType;
+            if (lastToken == TokenType.Int32Operand || lastToken == TokenType.RandomOperand || lastToken == TokenType.RightParenthesis)
+            {
+                context.SetFail("错误的左括号位置。");
+                return;
+            }
+
+            context._lastTokenType = Type;
             context.Push(Token);
             context.Pos++;
         }

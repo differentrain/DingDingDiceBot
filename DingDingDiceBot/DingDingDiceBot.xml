@@ -1,0 +1,471 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>DingDingDiceBot</name>
+    </assembly>
+    <members>
+        <member name="T:DingDingDiceBot.CmdHelper.Tokens.BinaryOperator">
+            <summary>
+            表示一个二元运算符。
+            </summary>
+        </member>
+        <member name="P:DingDingDiceBot.CmdHelper.Tokens.BinaryOperator.Precedence">
+            <summary>
+            运算符的优先级。
+            </summary>
+        </member>
+        <member name="P:DingDingDiceBot.CmdHelper.Tokens.BinaryOperator.Name">
+            <summary>
+            表示二元运算符的名称。它将被用作生成最后的输出算式。
+            </summary>
+        </member>
+        <member name="P:DingDingDiceBot.CmdHelper.Tokens.BinaryOperator.DingDingDiceBot#CmdHelper#Tokens#IOperatorOrFunction#ParameterCount">
+            <inheritdoc/>
+        </member>
+        <member name="M:DingDingDiceBot.CmdHelper.Tokens.BinaryOperator.ReadToken(DingDingDiceBot.CmdHelper.ParseContext)">
+            <inheritdoc/>
+        </member>
+        <member name="M:DingDingDiceBot.CmdHelper.Tokens.BinaryOperator.CalcCore(System.Int64,System.Int64)">
+            <summary>
+            通过此运算符进行计算并返回结果。
+            </summary>
+            <param name="a">第一个操作数。</param>
+            <param name="b">第二个操作数。</param>
+            <returns>计算的结果</returns>
+        </member>
+        <member name="M:DingDingDiceBot.CmdHelper.Tokens.BinaryOperator.TryGetOperator(System.Char*,System.Int32,System.Int32,DingDingDiceBot.CmdHelper.Tokens.BinaryOperator@)">
+            <summary>
+            检测字符串的当前位置是不是目标操作符。
+            </summary>
+            <param name="str">要检测的字符串。</param>
+            <param name="pos">当前位置。</param>
+            <param name="length">字符串长度。</param>
+            <param name="token">成功则返回字符串所表示的 <see cref="T:DingDingDiceBot.CmdHelper.Token"/> 。</param>
+            <returns>如果是目标操作符，返回操作符的长度，否则返回一个小于1的数。</returns>
+        </member>
+        <member name="T:DingDingDiceBot.CmdHelper.Tokens.CalcResult">
+            <summary>
+            表示计算的结果。
+            </summary>
+        </member>
+        <member name="P:DingDingDiceBot.CmdHelper.Tokens.CalcResult.Value">
+            <summary>
+            计算的结果
+            </summary>
+        </member>
+        <member name="P:DingDingDiceBot.CmdHelper.Tokens.CalcResult.Text">
+            <summary>
+            计算结果的字符串形式。
+            </summary>
+        </member>
+        <member name="T:DingDingDiceBot.CmdHelper.Tokens.IOperatorOrFunction">
+            <summary>
+            表示这是一个函数或运算符。
+            </summary>
+        </member>
+        <member name="P:DingDingDiceBot.CmdHelper.Tokens.IOperatorOrFunction.ParameterCount">
+            <summary>
+            所需的操作数的数量。
+            </summary>
+        </member>
+        <member name="M:DingDingDiceBot.CmdHelper.Tokens.IOperatorOrFunction.Calc(DingDingDiceBot.CmdHelper.Tokens.CalcResult[])">
+             <summary>
+            
+             </summary>
+             <param name="parameters"></param>
+             <returns></returns>
+        </member>
+        <member name="T:DingDingDiceBot.CmdHelper.CommandParser">
+            <summary>
+            表示解析字符串的服务。
+            </summary>
+        </member>
+        <member name="M:DingDingDiceBot.CmdHelper.CommandParser.RegisterToken(DingDingDiceBot.CmdHelper.Token)">
+            <summary>
+            将一个新的 <see cref="T:DingDingDiceBot.CmdHelper.Token"/> 类型注册到匹配服务中。
+            </summary>
+            <param name="token">一个自定义的 <see cref="T:DingDingDiceBot.CmdHelper.Token"/> 。</param>
+            <exception cref="T:System.ArgumentNullException"> <paramref name="token"/> 是 <c>null</c> .</exception>
+        </member>
+        <member name="T:DingDingDiceBot.CmdHelper.FunctionToken">
+            <summary>
+            表示一个函数。
+            </summary>
+        </member>
+        <member name="P:DingDingDiceBot.CmdHelper.FunctionToken.ParameterCount">
+            <summary>
+            所需的操作数的数量。
+            </summary>
+        </member>
+        <member name="P:DingDingDiceBot.CmdHelper.FunctionToken.Name">
+            <summary>
+            函数名。用于获取 <see cref="T:DingDingDiceBot.CmdHelper.Token"/>, 以及格式化输出。
+            <para>不区分大小写。</para>
+            </summary>
+        </member>
+        <member name="M:DingDingDiceBot.CmdHelper.FunctionToken.CalcCore(System.Int64[])">
+            <summary>
+            计算并返回运算结果。
+            </summary>
+            <param name="parameters">函数所需的参数。</param>
+            <returns>函数的计算结果。</returns>
+        </member>
+        <member name="T:DingDingDiceBot.CmdHelper.ParseContext">
+            <summary>
+            表示用于解析指令的上下文。
+            </summary>
+        </member>
+        <member name="F:DingDingDiceBot.CmdHelper.ParseContext.Pos">
+            <summary>
+            当前字符的坐标。
+            </summary>
+        </member>
+        <member name="P:DingDingDiceBot.CmdHelper.ParseContext.Str">
+            <summary>
+            获取要进行解析的字符串。
+            </summary>
+        </member>
+        <member name="P:DingDingDiceBot.CmdHelper.ParseContext.Length">
+            <summary>
+            获取要解析的字符串的长度。
+            </summary>
+        </member>
+        <member name="F:DingDingDiceBot.CmdHelper.ParseContext._lastTokenType">
+            <summary>
+            上一个匹配到的符号类型。
+            </summary>
+        </member>
+        <member name="P:DingDingDiceBot.CmdHelper.ParseContext.Fail">
+            <summary>
+            获取一个值，表示是否发生了匹配错误。
+            </summary>
+        </member>
+        <member name="P:DingDingDiceBot.CmdHelper.ParseContext.FailReason">
+            <summary>
+            获取一个值，表示错误原因。
+            </summary>
+        </member>
+        <member name="P:DingDingDiceBot.CmdHelper.ParseContext.Full">
+            <summary>
+            获取一个值，表示匹配缓冲区是否已满。
+            </summary>
+        </member>
+        <member name="P:DingDingDiceBot.CmdHelper.ParseContext.Empty">
+            <summary>
+            获取一个值，表示匹配缓冲区是否为空。
+            </summary>
+        </member>
+        <member name="P:DingDingDiceBot.CmdHelper.ParseContext.StackEmpty">
+            <summary>
+            获取一个值，表示匹配缓冲区的栈区域是否为空。
+            </summary>
+        </member>
+        <member name="P:DingDingDiceBot.CmdHelper.ParseContext.StackCount">
+            <summary>
+            获取一个值，表示匹配缓冲区的栈区域的对象数。
+            </summary>
+        </member>
+        <member name="P:DingDingDiceBot.CmdHelper.ParseContext.StackTop">
+            <summary>
+            获取匹配缓冲区的栈区域最顶部的对象。
+            </summary>
+        </member>
+        <member name="P:DingDingDiceBot.CmdHelper.ParseContext.QueueEnd">
+            <summary>
+             获取匹配缓冲区的队列区域最底部的对象。
+            </summary>
+        </member>
+        <member name="M:DingDingDiceBot.CmdHelper.ParseContext.Push(DingDingDiceBot.CmdHelper.Token)">
+            <summary>
+            将对象压入配缓冲区的栈区域。
+            </summary>
+            <param name="token">要压入栈区域的<see cref="T:DingDingDiceBot.CmdHelper.Token"/></param>
+        </member>
+        <member name="M:DingDingDiceBot.CmdHelper.ParseContext.Pop">
+            <summary>
+            将对象弹出配缓冲区的栈区域。
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:DingDingDiceBot.CmdHelper.ParseContext.Enqueue(DingDingDiceBot.CmdHelper.Token)">
+            <summary>
+            将对象加入配缓冲区的队列区域。
+            </summary>
+            <param name="token"></param>
+        </member>
+        <member name="M:DingDingDiceBot.CmdHelper.ParseContext.Replace(DingDingDiceBot.CmdHelper.Token)">
+            <summary>
+            将配缓冲区的队列区域的最后一个数据替换为目标对象。
+            </summary>
+            <param name="token"></param>
+        </member>
+        <member name="M:DingDingDiceBot.CmdHelper.ParseContext.Dispose">
+            <inheritdoc/>
+        </member>
+        <member name="T:DingDingDiceBot.CmdHelper.Token">
+            <summary>
+            表示一个读取到的符号。
+            </summary>
+        </member>
+        <member name="M:DingDingDiceBot.CmdHelper.Token.ReadToken(DingDingDiceBot.CmdHelper.ParseContext)">
+            <summary>
+            实现符号读取的方法。
+            </summary>
+            <param name="context">用于解析的上下文。</param>
+        </member>
+        <member name="T:DingDingDiceBot.CmdHelper.TokenType">
+            <summary>
+            表示 <see cref="T:DingDingDiceBot.CmdHelper.Token"/> 的所属类型。
+            </summary>
+        </member>
+        <member name="F:DingDingDiceBot.CmdHelper.TokenType.Begin">
+            <summary>
+            表示匹配开始。任何  <see cref="T:DingDingDiceBot.CmdHelper.Token"/> 的派生类都不应使用此类型。
+            </summary>
+        </member>
+        <member name="F:DingDingDiceBot.CmdHelper.TokenType.Int32Operand">
+            <summary>
+            表示32位整数。
+            </summary>
+        </member>
+        <member name="F:DingDingDiceBot.CmdHelper.TokenType.RandomOperand">
+            <summary>
+            表示一个骰子指令。
+            </summary>
+        </member>
+        <member name="F:DingDingDiceBot.CmdHelper.TokenType.BinaryOperator">
+            <summary>
+            表示一个二元运算符。
+            </summary>
+        </member>
+        <member name="F:DingDingDiceBot.CmdHelper.TokenType.LeftParenthesis">
+            <summary>
+            左括号。
+            </summary>
+        </member>
+        <member name="F:DingDingDiceBot.CmdHelper.TokenType.RightParenthesis">
+            <summary>
+            右括号。
+            </summary>
+        </member>
+        <member name="F:DingDingDiceBot.CmdHelper.TokenType.Negative">
+            <summary>
+            负号。
+            </summary>
+        </member>
+        <member name="F:DingDingDiceBot.CmdHelper.TokenType.Comma">
+            <summary>
+            逗号。
+            </summary>
+        </member>
+        <member name="F:DingDingDiceBot.CmdHelper.TokenType.Function">
+            <summary>
+            函数。
+            </summary>
+        </member>
+        <member name="F:DingDingDiceBot.CmdHelper.TokenType.WhiteSpace">
+            <summary>
+            空格。
+            </summary>
+        </member>
+        <member name="F:DingDingDiceBot.CmdHelper.TokenType.Result">
+            <summary>
+            最后的计算结果。
+            </summary>
+        </member>
+        <member name="T:DingDingDiceBot.DiceUtilities">
+             <summary>
+             一个静态工具类，提供利用钉钉企业私有机器人进行投骰的业务支持。
+             </summary>
+             <example>
+             这里展示了如何利用此工具类处理来自钉钉的用户聊天记录。
+             <code>
+             using Microsoft.AspNetCore.Http;
+             using Microsoft.AspNetCore.Mvc;
+            
+             using System.Net.Mime;
+             using System.Threading.Tasks;
+            
+             namespace Sample
+             {
+                 [ApiController]
+                 [Route("[controller]")]
+                 public class Roll : ControllerBase
+                 {
+                     [HttpPost]
+                     [Consumes(MediaTypeNames.Application.Json)]
+                     [ProducesResponseType(StatusCodes.Status200OK)]
+                     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+                     public async Task&lt;ActionResult&lt;DingDingDiceBot.ResponeJson>> PostAsync(DingDingDiceBot.RequestJson body)
+                     {
+                         // 验证请求是否来自钉钉。
+                         // DingDingDiceBot.DiceUtilities.VerifyRequestHeaders(IHeaderDictionary, string) 方法提供了验证的实现。
+                         if (!DingDingDiceBot.DiceUtilities.VerifyRequestHeaders(HttpContext.Request.Headers, APP_SECRET))
+                         {
+                             return Unauthorized();
+                         }
+                         // 直接读取请求的 BODY ，并返回计算结果。
+                         return await Task.FromResult(DingDingDiceBot.DiceUtilities.GetResponeFromRequest(body));
+                     }
+                     // 由钉钉开放平台分配密钥。
+                     private const string APP_SECRET = "XXXXXXXXXXXX";
+                 }
+             }
+             </code>
+             </example>
+             <remarks>
+             关于钉钉私有机器人的工作方式和部署方法详见钉钉开发文档：
+             <para>https://ding-doc.dingtalk.com/doc?spm=a2115p.8777639.0.0.205a4260i2g1Q8#/serverapi2/elzz1p</para>
+             <para>此静态类的所有成员都是线程安全的。</para>
+             </remarks>
+        </member>
+        <member name="M:DingDingDiceBot.DiceUtilities.VerifyRequestHeaders(Microsoft.AspNetCore.Http.IHeaderDictionary,System.String)">
+            <summary>
+            根据 <c>HTTP POST</c> 请求的 <c>HTTP HEADER</c> 验证网络请求是具有授权。
+            </summary>
+            <param name="headers">请求的 <c>HTTP HEADER</c> 部分。</param>
+            <param name="appSecret">由钉钉开放平台提供的 <c>App Secret</c> 。</param>
+            <returns>如果验证通过则返回 <c>true</c>, 否则返回 <c>false</c> 。 </returns>
+            <remarks>
+            当用户 <c>@</c> 目标机器人时，钉钉服务器会向开发者设置的服务器发送 <c>HTTP POST</c> 请求, 其 <c>HTTP HEADER</c> 为：
+            <list type = "table">
+            <item>
+            <term>Content-Type</term>
+            <description>application/json; charset=utf-8
+            (本实现并未验证是否采用 <c>UTF-8</c> 编码，因为根据规范，通过 <c>JSON</c> 交换数据必须采用此编码。)</description>
+            </item>
+            <item>
+            <term>timestamp</term>
+            <description>消息发送的时间戳，单位是毫秒。此时间戳与服务器时间戳相差不应超过1小时，即3600000毫秒。</description>
+            </item>
+            <item>
+            <term>sign</term>
+            <description>签名值。计算方式为用 <c>App Secret</c> 作为Key，对 <c>timestamp</c> + "\n"(换行符) + <c>App Secret</c> 的拼接字符串进行
+            <c>HmacSHA256</c> 计算，然后进行 <c>Base64</c> 编码。
+            </description>
+            </item>
+            </list>
+            </remarks>
+        </member>
+        <member name="M:DingDingDiceBot.DiceUtilities.VerifyAuthorizedAccess(System.String,System.String,System.String)">
+            <summary>
+            根据 <paramref name="timestamp"/>、<paramref name="sign"/> 以及目标 <paramref name="appSecret"/> 验证请求是否有权使用本服务。
+            </summary>
+            <param name="timestamp">消息发送的时间戳，单位是毫秒。此时间戳与服务器时间戳相差不应超过1小时，即3600000毫秒。</param>
+            <param name="sign">签名值。计算方式为用 <paramref name="appSecret"/> 作为Key，对 <paramref name="timestamp"/> + "\n"(换行符) + <paramref name="appSecret"/> 的拼接字符串进行
+            <see cref="T:System.Security.Cryptography.HMACSHA256"/> 计算，然后进行 <c>Base64</c> 编码。</param>
+            <param name="appSecret">由钉钉开放平台提供的 <c>App Secret</c> 。</param>
+            <returns>如果验证通过则返回 <c>true</c>, 否则返回 <c>false</c> 。 </returns>
+            <seealso cref="M:DingDingDiceBot.DiceUtilities.VerifyRequestHeaders(Microsoft.AspNetCore.Http.IHeaderDictionary,System.String)"/>
+        </member>
+        <member name="M:DingDingDiceBot.DiceUtilities.GetResponeFromRequest(DingDingDiceBot.RequestJson)">
+            <summary>
+            解析 <see cref="T:DingDingDiceBot.RequestJson"/> 中的用户消息，并以 <see cref="T:DingDingDiceBot.ResponeJson"/> 的形式返回处理结果。
+            </summary>
+            <param name="json">要处理的请求。包括发送者的昵称以及命令。</param>
+            <returns>返回 一个 <see cref="T:DingDingDiceBot.ResponeJson"/>，表示对于命令的处理结果。</returns>
+            <exception cref="T:System.ArgumentException">
+            <paramref name="json"/> 是 <c>null</c>。
+             - 或 -
+             <see cref="P:DingDingDiceBot.RequestJson.senderNick"/> 是 <see cref="F:System.String.Empty"/> 或 <c>null</c>。
+             - 或 -
+             <see cref="P:DingDingDiceBot.RequestJson.text"/> 是 <see cref="F:System.String.Empty"/> 或 <c>null</c>。
+            </exception>
+        </member>
+        <member name="M:DingDingDiceBot.DiceUtilities.GetResultFromCommand(System.String)">
+            <summary>
+            对指定的字符串进行指令解析，并返回一个表示处理后结果的字符串。
+            </summary>
+            <param name="command"></param>
+            <returns>返回 <see cref="T:System.String"/> 字符串，表示对于命令的处理结果。</returns>
+            <exception cref="T:System.ArgumentException">
+            <paramref name="command"/> 是 <see cref="F:System.String.Empty"/> 或 <c>null</c>。</exception>
+        </member>
+        <member name="T:DingDingDiceBot.MarkDownText">
+            <summary>
+            表示在钉钉开发文档中定义的 <c>JSON OBJECT</c> "markdown".
+            <para> 包含信息的标题和 <c>markdown</c> 格式正文。</para>
+            </summary>
+            <remarks>
+            详见 <see cref="T:DingDingDiceBot.ResponeJson"/> 。
+            <para>更多资料可参考钉钉开发文档：</para>
+            https://ding-doc.dingtalk.com/doc?spm=a2115p.8777639.0.0.205a4260i2g1Q8#/serverapi2/elzz1p
+            </remarks>
+        </member>
+        <member name="M:DingDingDiceBot.MarkDownText.#ctor(System.String)">
+            <summary>
+            初始化 <see cref="T:DingDingDiceBot.MarkDownText"/> 的新实例，并将 <see cref="P:DingDingDiceBot.MarkDownText.text"/> 的值设为 <paramref name="t"/>。
+            </summary>
+            <param name="t">要赋予 <see cref="P:DingDingDiceBot.MarkDownText.text"/> 的值。</param>
+        </member>
+        <member name="P:DingDingDiceBot.MarkDownText.title">
+            <summary>
+            首屏会话透出的展示内容。
+            </summary>
+            <value>这里总是返回 "DiceKun", 也可修改为其他内容。</value>
+        </member>
+        <member name="P:DingDingDiceBot.MarkDownText.text">
+            <summary>
+            markdown格式的消息内容。
+            </summary>
+            <value>这个值便是处理命令后返回的字符串。</value>
+        </member>
+        <member name="T:DingDingDiceBot.RequestJson">
+            <summary>
+            一个类，表示 <c>HTTP POST</c> 请求的 <c>JSON</c> 结构。
+            </summary>
+            <remarks>
+            当用户 <c>@</c> 目标机器人时，钉钉服务器会向开发者设置的服务器发送 <c>HTTP POST</c> 请求, 其 <c>BODY</c> 是一个 <c>JSON</c> 结构。
+            <para>次类就是 <c>JSON</c> 结构的简化版，只要求最关键的信息。</para>
+            钉钉开发文档中为此结构定义了更多的字段：
+            <para>https://ding-doc.dingtalk.com/doc?spm=a2115p.8777639.0.0.205a4260i2g1Q8#/serverapi2/elzz1p</para>
+            </remarks>
+        </member>
+        <member name="P:DingDingDiceBot.RequestJson.senderNick">
+            <summary>
+            发送消息的用户昵称。
+            </summary>
+        </member>
+        <member name="P:DingDingDiceBot.RequestJson.text">
+            <summary>
+            获取一个值，存储着用户发送的消息文本。
+            </summary>
+        </member>
+        <member name="T:DingDingDiceBot.ResponeJson">
+            <summary>
+            一个类，表示返回的 <c>JSON</c> 结构。
+            </summary>
+            <remarks>
+            钉钉开发文档中为此结构定义了更多的字段，以及 <see cref="P:DingDingDiceBot.ResponeJson.msgtype"/> 类型。
+            <para>https://ding-doc.dingtalk.com/doc?spm=a2115p.8777639.0.0.205a4260i2g1Q8#/serverapi2/elzz1p</para>
+            </remarks>
+        </member>
+        <member name="M:DingDingDiceBot.ResponeJson.#ctor(System.String)">
+            <summary>
+            初始化 <see cref="T:DingDingDiceBot.ResponeJson"/> 的新实例，并将 <see cref="P:DingDingDiceBot.ResponeJson.markdown"/> 属性的 <see cref="P:DingDingDiceBot.MarkDownText.text"/> 的值设为 <paramref name="t"/>。
+            </summary>
+            <param name="t"></param>
+        </member>
+        <member name="P:DingDingDiceBot.ResponeJson.msgtype">
+            <summary>
+            获取一个值，表示返回给调用方的数据类型。
+            </summary>
+            <value>这里总是返回 "markdown" 。</value>
+        </member>
+        <member name="P:DingDingDiceBot.ResponeJson.markdown">
+            <summary>
+            获取一个值，包含信息的标题和 <c>markdown</c> 格式正文。
+            </summary>
+        </member>
+        <member name="T:DingDingDiceBot.TextContent">
+            <summary>
+            表示请求的文本内容。
+            </summary>
+        </member>
+        <member name="P:DingDingDiceBot.TextContent.content">
+            <summary>
+            用户发来的纯文本格式消息正文。
+            </summary>
+        </member>
+    </members>
+</doc>

@@ -1,9 +1,16 @@
 ﻿namespace DingDingDiceBot.CmdHelper
 {
-    internal abstract class Token
+    /// <summary>
+    /// 表示一个读取到的符号。
+    /// </summary>
+    public abstract class Token
     {
-        public abstract TokenType Type { get; }
+        internal abstract TokenType Type { get; }
 
-        internal abstract void ReadToken(ParseContext context);
+        /// <summary>
+        /// 实现符号读取的方法。
+        /// </summary>
+        /// <param name="context">用于解析的上下文。</param>
+        internal abstract unsafe void ReadToken(ParseContext context);
     }
 }

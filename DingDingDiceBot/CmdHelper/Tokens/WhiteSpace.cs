@@ -4,9 +4,9 @@
     {
         public static readonly WhiteSpace Token = new WhiteSpace();
 
-        public override TokenType Type => TokenType.WhiteSpace;
+        internal override TokenType Type => TokenType.WhiteSpace;
 
-        internal unsafe override void ReadToken(ParseContext context)
+        internal override unsafe void ReadToken(ParseContext context)
         {
             while (context.Pos < context.Length && char.IsWhiteSpace(context.Str[context.Pos]))
             {

@@ -6,20 +6,18 @@
 
         public override int Precedence => 11;
 
-        public override bool IsSubOrDiv => false;
-
         public override string Name => "+";
 
         public override long CalcCore(long a, long b) => a + b;
 
-        protected unsafe override BinaryOperator IsThisOperator(ParseContext context)
+        protected override unsafe int TryGetOperator(char* str, int pos, int length, out BinaryOperator token)
         {
-            if (context.Str[context.Pos] != '+')
+            token = Token;
+            if (str[pos] != '+')
             {
-                return null;
+                return 0;
             }
-            context.Pos++;
-            return Token;
+            return 1;
         }
     }
 }

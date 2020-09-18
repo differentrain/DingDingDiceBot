@@ -7,7 +7,7 @@ namespace DingDingDiceBot.CmdHelper.Tokens
         public static readonly Int32Operand Token = new Int32Operand();
         private const int MAX_LEN = 10;
 
-        public override TokenType Type => TokenType.Int32Operand;
+        internal override TokenType Type => TokenType.Int32Operand;
         public long Value { get; private set; }
 
         public CalcResult ToCalcResult() => new CalcResult(Value, Value.ToString(), 0);
@@ -16,9 +16,9 @@ namespace DingDingDiceBot.CmdHelper.Tokens
 
         internal override void ReadToken(ParseContext context)
         {
-            var lastToken = context.LastTokenType;
-            var isNegative = context.LastTokenType == TokenType.Negative;
-            var value = GetABSInt32FixPos(context);
+            TokenType lastToken = context._lastTokenType;
+            bool isNegative = context._lastTokenType == TokenType.Negative;
+            long value = GetABSInt32FixPos(context);
             if (value <= -1L)
             {
                 if (isNegative)
@@ -27,25 +27,26 @@ namespace DingDingDiceBot.CmdHelper.Tokens
                 }
                 return;
             }
-            if (lastToken == TokenType.Int32Operand)
+            if (lastToken == TokenType.Int32Operand || lastToken == TokenType.RandomOperand ||
+                lastToken == TokenType.Function || lastToken == TokenType.RightParenthesis)
             {
-                context.SetFail("多余的常数操作符。");
+                context.SetFail("常数操作符位置错误。");
                 return;
             }
-            context.LastTokenType = Type;
+            context._lastTokenType = Type;
             context.Enqueue(new Int32Operand
             {
                 Value = (isNegative ? (0L - value) : value)
             });
         }
 
-        internal unsafe static long GetABSInt32FixPos(ParseContext context)
+        internal static unsafe long GetABSInt32FixPos(ParseContext context)
         {
             char* str = context.Str;
-            var pos = context.Pos;
-            var length = context.Length;
-            var i = 0;
-            var limit = Math.Min(length - pos, 10);
+            int pos = context.Pos;
+            int length = context.Length;
+            int i = 0;
+            int limit = Math.Min(length - pos, 10);
             byte* buf = stackalloc byte[limit];
             while (i < limit && str[i + pos] >= '0' && str[i + pos] <= '9')
             {
@@ -55,9 +56,9 @@ namespace DingDingDiceBot.CmdHelper.Tokens
             if (i > 0)
             {
                 context.Pos += i;
-                var j = i - 1;
-                var value = (long)buf[j--];
-                var k = 10;
+                int j = i - 1;
+                long value = (long)buf[j--];
+                int k = 10;
                 while (j >= 0)
                 {
                     value += buf[j] * k;

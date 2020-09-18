@@ -10,6 +10,7 @@
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <DocumentationFile>C:\Users\diffe\Desktop\DingDingDiceBot\DingDingDiceBot\DingDingDiceBot.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
