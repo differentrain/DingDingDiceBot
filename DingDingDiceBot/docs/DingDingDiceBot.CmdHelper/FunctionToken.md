@@ -20,6 +20,10 @@ public abstract class FunctionToken : Token
 | [FunctionToken](FunctionToken/FunctionToken.md)() | The default constructor. |
 | abstract [CalcCore](FunctionToken/CalcCore.md)(…) | 计算并返回运算结果。 |
 
+## Remarks
+
+通过继承 [`FunctionToken`](FunctionToken.md) 以添加二元运算符的例子详见 [`Token`](Token.md) 类的说明
+
 ## See Also
 
 * class [Token](Token.md)
