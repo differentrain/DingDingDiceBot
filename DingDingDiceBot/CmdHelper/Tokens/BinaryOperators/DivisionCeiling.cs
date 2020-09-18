@@ -6,7 +6,7 @@ namespace DingDingDiceBot.CmdHelper.Tokens.BinaryOperators
     {
         public static readonly DivisionCeiling Token = new DivisionCeiling();
 
-        public override int Precedence => 10;
+        public override int Precedence => PrecedenceOfMultiplicationAndDivision;
 
         internal override bool IsSubOrDiv => true;
 
@@ -14,14 +14,20 @@ namespace DingDingDiceBot.CmdHelper.Tokens.BinaryOperators
 
         public override long CalcCore(long a, long b) => (long)Math.Ceiling((double)a / b);
 
-        protected override unsafe int TryGetOperator(char* str, int pos, int length, out BinaryOperator token)
+        protected override int TryGetOperator(string command, int pos, int length, out BinaryOperator token)
         {
-            token = Token;
-            if (str[pos] != '\\')
+            unsafe
             {
-                return 0;
+                fixed (char* p = command)
+                {
+                    token = Token;
+                    if (p[pos] != '\\')
+                    {
+                        return 0;
+                    }
+                    return 1;
+                }
             }
-            return 1;
         }
     }
 }

@@ -1,7 +1,5 @@
 ﻿using System;
 
-using DingDingDiceBot.CmdHelper.Tokens;
-
 using Microsoft.Extensions.ObjectPool;
 
 namespace DingDingDiceBot.CmdHelper

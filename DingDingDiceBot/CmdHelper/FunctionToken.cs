@@ -1,12 +1,13 @@
 ﻿using System.Text;
 
-using DingDingDiceBot.CmdHelper.Tokens;
-
 namespace DingDingDiceBot.CmdHelper
 {
     /// <summary>
     /// 表示一个函数。
     /// </summary>
+    /// <remarks>
+    ///  通过继承 <see cref="FunctionToken"/> 以添加二元运算符的例子详见 <see cref="Token"/> 类的说明
+    /// </remarks>
     public abstract class FunctionToken : Token, IOperatorOrFunction
     {
         internal override TokenType Type => TokenType.Function;

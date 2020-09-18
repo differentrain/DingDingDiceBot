@@ -1,15 +1,33 @@
-﻿namespace DingDingDiceBot.CmdHelper.Tokens
+﻿namespace DingDingDiceBot.CmdHelper
 {
     /// <summary>
     /// 表示一个二元运算符。
     /// </summary>
+    /// <remarks>
+    ///  通过继承 <see cref="BinaryOperator"/> 以添加二元运算符的例子详见 <see cref="Token"/> 类的说明
+    /// </remarks>
     public abstract class BinaryOperator : Token, IOperatorOrFunction
     {
         internal override TokenType Type => TokenType.BinaryOperator;
 
         /// <summary>
+        /// 表示乘法和除法运算符的优先级。
+        /// </summary>
+        public const int PrecedenceOfMultiplicationAndDivision = 10;
+
+        /// <summary>
+        /// 表示加法和减法运算符的优先级。
+        /// </summary>
+        public const int PrecedenceOfAdditionAndSubtraction = PrecedenceOfMultiplicationAndDivision + 1;
+
+        /// <summary>
         /// 运算符的优先级。
         /// </summary>
+        /// <remarks>
+        /// 内置的乘法、除法运算符的优先级被设置为 10。<see cref="PrecedenceOfMultiplicationAndDivision"/> 。
+        /// <para>加法和减法运算符的优先级被设置为 11。<see cref="PrecedenceOfAdditionAndSubtraction"/> 。</para>
+        /// <para>如果要添加新的二元运算符，请根据这两个值确定新的运算符的优先级。</para>
+        /// </remarks>
         public abstract int Precedence { get; }
 
         internal virtual bool IsSubOrDiv => false;
@@ -27,7 +45,7 @@
         {
             unsafe
             {
-                int tokenLength = TryGetOperator(context.Str, context.Pos, context.Length, out BinaryOperator token);
+                int tokenLength = TryGetOperator(context.Command, context.Pos, context.Length, out BinaryOperator token);
                 if (tokenLength > 0)
                 {
                     context.Pos += tokenLength;
@@ -101,11 +119,11 @@
         /// <summary>
         /// 检测字符串的当前位置是不是目标操作符。
         /// </summary>
-        /// <param name="str">要检测的字符串。</param>
+        /// <param name="command">要检测的字符串。</param>
         /// <param name="pos">当前位置。</param>
         /// <param name="length">字符串长度。</param>
         /// <param name="token">成功则返回字符串所表示的 <see cref="Token"/> 。</param>
         /// <returns>如果是目标操作符，返回操作符的长度，否则返回一个小于1的数。</returns>
-        protected abstract unsafe int TryGetOperator(char* str, int pos, int length, out BinaryOperator token);
+        protected abstract int TryGetOperator(string command, int pos, int length, out BinaryOperator token);
     }
 }

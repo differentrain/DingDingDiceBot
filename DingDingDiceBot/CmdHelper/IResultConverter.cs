@@ -1,4 +1,4 @@
-﻿namespace DingDingDiceBot.CmdHelper.Tokens
+﻿namespace DingDingDiceBot.CmdHelper
 {
     internal interface IResultConverter
     {

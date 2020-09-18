@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace DingDingDiceBot.CmdHelper.Tokens
+namespace DingDingDiceBot.CmdHelper
 {
     /// <summary>
     /// 表示计算的结果。

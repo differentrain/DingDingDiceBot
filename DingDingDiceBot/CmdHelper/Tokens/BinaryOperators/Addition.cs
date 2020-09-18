@@ -4,20 +4,26 @@
     {
         public static readonly Addition Token = new Addition();
 
-        public override int Precedence => 11;
+        public override int Precedence => PrecedenceOfAdditionAndSubtraction;
 
         public override string Name => "+";
 
         public override long CalcCore(long a, long b) => a + b;
 
-        protected override unsafe int TryGetOperator(char* str, int pos, int length, out BinaryOperator token)
+        protected override int TryGetOperator(string command, int pos, int length, out BinaryOperator token)
         {
-            token = Token;
-            if (str[pos] != '+')
+            unsafe
             {
-                return 0;
+                fixed (char* p = command)
+                {
+                    token = Token;
+                    if (p[pos] != '+')
+                    {
+                        return 0;
+                    }
+                    return 1;
+                }
             }
-            return 1;
         }
     }
 }

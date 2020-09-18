@@ -1,4 +1,4 @@
-﻿namespace DingDingDiceBot.CmdHelper.Tokens
+﻿namespace DingDingDiceBot.CmdHelper
 {
     /// <summary>
     /// 表示这是一个函数或运算符。
