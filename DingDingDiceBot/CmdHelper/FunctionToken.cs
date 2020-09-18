@@ -45,24 +45,26 @@ namespace DingDingDiceBot.CmdHelper
 
         CalcResult IOperatorOrFunction.Calc(params CalcResult[] parameters)
         {
-            long[] ls = new long[ParameterCount];
-
-            using (var sbw = InternalStringBuilderWapper.Create())
+            using (var parms=new InternalLongParametersPool(ParameterCount))
             {
-                StringBuilder sb = sbw.SB.Append(Name).Append('(');
-                unsafe
+                long[] ls = parms.LongArray;
+                using (var sbw = InternalStringBuilderWapper.Create())
                 {
-                    fixed (long* p = ls)
+                    StringBuilder sb = sbw.SB.Append(Name).Append('(');
+                    unsafe
                     {
-                        for (int i = 0; i < ParameterCount; i++)
+                        fixed (long* p = ls)
                         {
-                            p[i] = parameters[i].Value;
-                            sb.Append(parameters[i].Text).Append(',');
+                            for (int i = 0; i < ParameterCount; i++)
+                            {
+                                p[i] = parameters[i].Value;
+                                sb.Append(parameters[i].Text).Append(',');
+                            }
                         }
                     }
+                    sb.Remove(sb.Length - 1, 1).Append(')');
+                    return new CalcResult(CalcCore(ls), sb.ToString(), 0);
                 }
-                sb.Remove(sb.Length - 1, 1).Append(')');
-                return new CalcResult(CalcCore(ls), sb.ToString(), 0);
             }
         }
 

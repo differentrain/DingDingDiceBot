@@ -9,7 +9,7 @@ namespace DingDingDiceBot.CmdHelper
     /// </summary>
     internal sealed class ParseContext : IDisposable
     {
-        private const int MAX_TOKEN_COUNT = 256;
+        internal const int MAX_TOKEN_COUNT = 256;
         private const int MAX_BUFFER_SIZE = MAX_TOKEN_COUNT << 1;
         private const int STACK_MIN_INDEX = MAX_TOKEN_COUNT;
 
@@ -161,14 +161,16 @@ namespace DingDingDiceBot.CmdHelper
                     {
                         return null;
                     }
-                    var ps = new CalcResult[pCount--];
-
-                    while (0 <= pCount)
+                    using (var parms = new InternalCalcsResultParametersPool(pCount))
                     {
-                        ps[pCount] = Pop() as CalcResult;
-                        pCount--;
+                        CalcResult[] ps = parms.CalcResults;
+                        while (0 <= pCount)
+                        {
+                            ps[pCount] = Pop() as CalcResult;
+                            pCount--;
+                        }
+                        Push((t as IOperatorOrFunction).Calc(ps));
                     }
-                    Push((t as IOperatorOrFunction).Calc(ps));
                 }
             }
             if (StackCount != 1)
