@@ -1,7 +1,7 @@
 # DingDingDiceBot
 钉钉私有机器人帮助类, 用于网团投骰。
 
-整体代码不到1000行，可执行代码不到400行，可以方便地移植到任何基于 .NET (Core) 的Web服务中。
+整体代码不到1000行，可执行代码不到400行，可以方便地添加到任何基于 .NET (Core) 的Web服务中。
 
 关于钉钉企业私有机器人的说明和配置详见 [钉钉开发文档](https://ding-doc.dingtalk.com/doc?spm=a2115p.8777639.0.0.205a4260i2g1Q8#/serverapi2/elzz1p)。
 
