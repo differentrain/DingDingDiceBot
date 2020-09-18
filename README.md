@@ -50,7 +50,7 @@ public async Task<ActionResult<DingDingDiceBot.ResponeJson>> PostAsync(DingDingD
 - 减法：`-`
 - 乘法：`*`
 - 除法：向下取整 `/` ，向上取整 `\`
-- 投骰：`d\` 或 `D`，例如 `1d20`, 省略前缀则表示1。例如 `d20` 是 `1d20`的简写。
+- 投骰：`d\` 或 `D`，例如 `1d20` 。 省略前缀则表示1，例如 `d20` 是 `1d20`的简写。
 - 分组：用 `(` 和 `)` 包围的内容优先计算。
 
 按照C#的运算符优先级进行计算。
